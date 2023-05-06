@@ -20,11 +20,13 @@ for i in range(num_vars):
     problem.linear_constraints.add(lin_expr=[cplex.SparsePair(ind=list(range(num_vars)), val=A[i])], rhs=[b[i]])
 
 start_time = time.time()
+print("Time program starts")
+print(time.time())
 problem.solve()
 no_parallel_time = time.time() - start_time
 print("Solution time without parallel:", no_parallel_time)
 
-problem.parameters.threads.set(0)
+problem.parameters.threads.set(5)
 start_time = time.time()
 problem.solve()
 parallel_time = time.time() - start_time
